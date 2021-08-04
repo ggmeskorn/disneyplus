@@ -6,7 +6,7 @@ ListTile mylisttitleheader(IconData leadingicondata, String title,
       leading: Icon(
         leadingicondata,
         color: Colors.blue,
-        size: 60,
+        size: 6,
       ),
       title: Text(
         title,
