@@ -9,6 +9,7 @@ import 'package:mvvm_apimovie/src/bloc/moviedetailbloc/movie_detail_state.dart';
 import 'package:mvvm_apimovie/src/component/detail_title_card.dart';
 import 'package:mvvm_apimovie/src/component/title_card.dart';
 import 'package:mvvm_apimovie/src/model/movie_detail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailTitle extends StatefulWidget {
   DetailTitle({Key key}) : super(key: key);
@@ -30,10 +31,16 @@ class _DetailTitleState extends State<DetailTitle> {
           );
         } else if (state is MovieDetailLoaded) {
           MovieDetail movieDetail = state.detail;
-          return DetailTitleCard(
-            title: movieDetail.title,
-            image:
-                'https://image.tmdb.org/t/p/original/${movieDetail.backdropPath}',
+          return Stack(
+            children: [
+              DetailTitleCard(
+                title: movieDetail.title.toUpperCase(),
+                image:
+                    'https://image.tmdb.org/t/p/original/${movieDetail.backdropPath}',
+                youtube:
+                    'https://www.youtube.com/embed/${movieDetail.trailerId}',
+              ),
+            ],
           );
           // TitleCard(
           //           title: movieDetail.title,

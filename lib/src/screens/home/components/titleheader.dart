@@ -12,19 +12,28 @@ import 'package:mvvm_apimovie/src/model/movie.dart';
 import 'package:mvvm_apimovie/src/screens/detail/movie_detail_screen.dart';
 
 class TitleHeader extends StatefulWidget {
-  TitleHeader({Key key}) : super(key: key);
+    final int selectedGenre;
+
+  TitleHeader({Key key, this.selectedGenre = 28}) : super(key: key);
 
   @override
   _TitleHeaderState createState() => _TitleHeaderState();
 }
 
 class _TitleHeaderState extends State<TitleHeader> {
+    int selectedGenre;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedGenre = widget.selectedGenre;
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MovieBloc>(
-          create: (_) => MovieBloc()..add(MovieEventStarted(0, '')),
+          create: (_) => MovieBloc()..add(MovieEventStarted(selectedGenre, '')),
         ),
       ],
       child: BlocBuilder<MovieBloc, MovieState>(
